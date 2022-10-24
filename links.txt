@@ -1,0 +1,10 @@
+https://www.arduino.cc/en/Guide : overall guide
+
+https://docs.arduino.cc/learn/electronics/servo-motors : tutorial how to control servo motors
+https://www.arduino.cc/reference/en/libraries/servo/ : servo library info
+
+https://create.arduino.cc/projecthub/Ayeon0122/reading-a-photoresistor-1e705e : example photoresisor read
+
+https://www.arduino.cc/reference/en/ : basic documantation
+
+https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage : simple read and write to console
