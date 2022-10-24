@@ -1,36 +1,43 @@
-#include<Servo.h>
+//#include<Servo.h>
+#include<Arduino.h>
+#include<ServoEasing.hpp>
 
-Servo servo1;
+ServoEasing servo1;
 
 const int readPin = A0;
 const int writePin = 9;
 
-int lightCal;
-int lightVal;
+float curLightValue;
+float prevLightValue;
+
+bool positionSet;
+float rotOffset = 15;
 
 void setup() {
   Serial.begin(9600);
-  servo1.attach(writePin);
+  servo1.attach(writePin, 0);
 
-  pinMode(writePin, OUTPUT);
-  lightCal = analogRead(readPin);
+  prevLightValue = analogRead(readPin);
+  prevLightValue = map(prevLightValue, 0, 1023, 0, 180);
+
+  delay(1000);
 }
 
 void loop() {
-  lightVal = analogRead(readPin);
-  lightVal = map(lightVal, 0 , 1023, 0, 180);
+  positionSet = false;
+  curLightValue = analogRead(readPin);
 
-  /*if(lightVal < lightCal - 50){
-    digitalWrite(writePin, HIGH);
-  }else{
-    digitalWrite(writePin, LOW);
-  }*/
+  float voltage = curLightValue * (3.3 / 1023.0);
+  //Serial.println(voltage);
 
-  servo1.write(lightVal);
+  curLightValue = map(curLightValue, 0 , 1023, 0, 180);
 
-  float voltage = lightVal * (3.3 / 1023.0);
-  // print out the value you read:
-  Serial.println(voltage);
+  Serial.println(abs(curLightValue - prevLightValue));
 
-  delay(15);
+  if(abs(curLightValue - prevLightValue) > rotOffset){
+    prevLightValue = analogRead(readPin);
+    prevLightValue = map(prevLightValue, 0, 1023, 0, 180);
+    servo1.easeTo(curLightValue, 30);
+    delay(500);
+  }
 }
