@@ -8,3 +8,5 @@ https://create.arduino.cc/projecthub/Ayeon0122/reading-a-photoresistor-1e705e : 
 https://www.arduino.cc/reference/en/ : basic documantation
 
 https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage : simple read and write to console
+
+https://create.arduino.cc/projecthub/336271/arduino-solar-tracker-41ef82
